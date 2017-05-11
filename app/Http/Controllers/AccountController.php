@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-use App\Purpose;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -15,11 +14,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $purposes = \App\Purpose::all();
-        print_r($purposes);exit;
-        return response()->json([
-            'hello' => 'word'
-        ]);
+        //
     }
 
     /**
