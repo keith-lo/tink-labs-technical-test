@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Account;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\StoreAccountPost;
+
 class AccountController extends Controller
 {
     /**
@@ -33,9 +35,9 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAccountPost $request)
     {
-        //
+        echo 'hello world';exit;
     }
 
     /**

@@ -24,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => '1.0'], function(){
 
     Route::resource('account', 'AccountController', ['only' => [
-        'index', 'show', 'create', 'destroy'
+        'index', 'show', 'store', 'destroy'
     ]]);
 
     Route::resource('transaction', 'TransactionController', ['only' => [
