@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Transaction;
+
 use Illuminate\Http\Request;
+use App\Http\Requests\SimplyTransactionPost;
 
 class TransactionController extends Controller
 {
@@ -25,6 +28,17 @@ class TransactionController extends Controller
     public function create()
     {
         //
+    }
+
+    /**
+     * Deposit cash into an account
+     *
+     * @param \App\Http\Requests\SimplyTransactionPost $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deposit(SimplyTransactionPost $request)
+    {
+        print_r($request);exit;
     }
 
     /**

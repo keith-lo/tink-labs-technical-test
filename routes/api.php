@@ -30,8 +30,10 @@ Route::group(['prefix' => '1.0'], function(){
     Route::resource('transaction', 'TransactionController', ['only' => [
         'index', 'show', 'create', 'transfer'
     ]]);
-
+    Route::post('transaction/deposit', 'TransactionController@deposit');
     Route::post('transaction/transfer', 'TransactionController@transfer');
 
-
+    Route::get('/', function () {
+        return response()->json(['message' => 'Welcome to Tink-Labs', 'datetime' => date('c')]);
+    });
 });

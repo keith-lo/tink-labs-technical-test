@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAccountPost extends FormRequest
+class SimplyTransactionPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreAccountPost extends FormRequest
      */
     public function authorize()
     {
-        //@TODO User authorization
+        //@TODO User authorization'
         return true;
     }
 
@@ -26,8 +26,7 @@ class StoreAccountPost extends FormRequest
     {
         return [
             'number' => 'required|unique:accounts|max:255',
-            'balance' => 'nullable|numeric',
+            'amount' => 'required|numeric',
         ];
     }
-
 }
