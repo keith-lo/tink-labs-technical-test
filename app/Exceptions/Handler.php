@@ -44,14 +44,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if( $request->ajax() ){
-            if( $exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException ){
-                return response()->json([
-                    'code' => $exception->getCode(),
-                    'message' => $exception->getMessage(),
-                ], 422);
-            }
+        if( $request->wantsJson() ){
+            $response = [
+                'errors' => 'Sorry, something went wrong.',
+                'message' => $exception->getMessage(),
+            ];
+            return response()->json($response, 400);
         }
+
         return parent::render($request, $exception);
     }
 

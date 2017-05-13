@@ -25,7 +25,7 @@ class SimplyTransactionPost extends FormRequest
     public function rules()
     {
         return [
-            'number' => 'required|unique:accounts|max:255',
+            'number' => 'required|max:255',
             'amount' => 'required|numeric',
         ];
     }

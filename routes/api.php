@@ -24,13 +24,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => '1.0'], function(){
 
     Route::resource('account', 'AccountController', ['only' => [
-        'index', 'show', 'store', 'destroy'
+        'index', 'show', 'store', 'destroy',
     ]]);
 
     Route::resource('transaction', 'TransactionController', ['only' => [
-        'index', 'show', 'create', 'transfer'
+        'index', 'show',
     ]]);
     Route::post('transaction/deposit', 'TransactionController@deposit');
+    Route::post('transaction/withdraw', 'TransactionController@withdraw');
     Route::post('transaction/transfer', 'TransactionController@transfer');
 
     Route::get('/', function () {

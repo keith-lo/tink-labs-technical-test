@@ -32,15 +32,15 @@ class CreateAccountsTable extends Migration
             $table->integer('account_id')->unsigned();
             $table->integer('purpose_id')->unsigned();
 
-            $table->boolean('is_incoming')->default(false);
+            $table->boolean('is_credit')->default(false);
             $table->integer('status')->default(0);
 
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->decimal('amount', 15, 2)->default(0);
 
             $table->datetimeTz('created_at')->nullable();
-            $table->datetimeTz('completed_at')->nullable();
+            $table->datetimeTz('updated_at')->nullable();
 
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->foreign('purpose_id')->references('id')->on('purposes');
