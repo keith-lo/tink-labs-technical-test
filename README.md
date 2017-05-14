@@ -56,12 +56,20 @@ php db:seed
 
 The system document root should be map to `public` folder.
 
-For excample:
+For example:
 ```
 DocumentRoot "/home/vagrant/projects/my-app/public"
 ```
 
+## API
+
+
+
 ## Testing
 
-In order to test this system, we can use [Postman](https://www.getpostman.com/)
+### Postman
+Postman is the complete toolchain for API developers. To install postman, please reference https://www.getpostman.com/ .
 
+Please check `postman` folder for a sample of preset postman testing environment.
+
+You can simply `Import folder` and start the api testing.
