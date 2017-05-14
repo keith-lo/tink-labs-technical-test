@@ -27,9 +27,6 @@ Route::group(['prefix' => '1.0'], function(){
         'index', 'show', 'store', 'destroy',
     ]]);
 
-    Route::resource('transaction', 'TransactionController', ['only' => [
-        'index', 'show',
-    ]]);
     Route::post('transaction/deposit', 'TransactionController@deposit');
     Route::post('transaction/withdraw', 'TransactionController@withdraw');
     Route::post('transaction/transfer', 'TransactionController@transfer');

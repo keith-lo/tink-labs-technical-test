@@ -16,17 +16,12 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return response()->json(['foo' => 'bar']);
-    }
+        $accounts = \App\Account::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'success' => true,
+            'accounts' => $accounts->toArray(),
+        ]);
     }
 
     /**
@@ -58,33 +53,11 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
+        $account->transactions; //Include account transactions
         return response()->json([
             'success' => true,
             'data' => ['account' => $account],
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Account $account)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Account $account)
-    {
-        //
     }
 
     /**
@@ -95,6 +68,9 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
+        echo 'ok';
+        $account->delete();
+        exit;
         //Set is_active = 0 to archive the account instead of delete it.
         $account->is_active = false;
 
