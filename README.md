@@ -52,3 +52,15 @@ And insert database records
 php db:seed
 ```
 
+### Step 5: Map apache `DocumentRoot`
+
+The system document root should be map to `public` folder.
+
+For excample:
+```
+DocumentRoot "/home/vagrant/projects/my-app/public"
+```
+
+## Testing
+
+`Postman/`
