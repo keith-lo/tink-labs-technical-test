@@ -15,11 +15,11 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('is_active')->default(true);
             $table->string('number')->unique();
             $table->double('balance')->default(0);
             $table->datetimeTz('created_at')->nullable();
             $table->datetimeTz('updated_at')->nullable();
+            $table->softDeletes();
         });
 
         Schema::create('purposes', function (Blueprint $table) {
