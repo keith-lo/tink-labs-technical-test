@@ -1,0 +1,244 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Tink-Labs",
+		"_postman_id": "d44d853b-15d1-c78d-8169-80e35aa2c27e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"description": "",
+			"item": [
+				{
+					"name": "Open an account",
+					"request": {
+						"url": "{{url}}/api/1.0/account",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "123456",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "balance",
+									"value": "500",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get account balance",
+					"request": {
+						"url": "{{url}}/api/1.0/account/2",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "123456",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "balance",
+									"value": "100",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "List accounts",
+					"request": {
+						"url": "{{url}}/api/1.0/account/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "123456",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "balance",
+									"value": "100",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an account",
+					"request": {
+						"url": "{{url}}/api/1.0/account/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"description": "",
+			"item": [
+				{
+					"name": "Deposit",
+					"request": {
+						"url": "{{url}}/api/1.0/transaction/deposit/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "123456",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "amount",
+									"value": "1000",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"url": "{{url}}/api/1.0/transaction/withdraw/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "123456",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "amount",
+									"value": "1000",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer",
+					"request": {
+						"url": "{{url}}/api/1.0/transaction/transfer/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "from",
+									"value": "123456",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "amount",
+									"value": "35",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "to",
+									"value": "234567",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

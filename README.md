@@ -13,7 +13,42 @@ In order to run the system, the following software are require:
 - Mbstring PHP Extension
 - Tokenizer PHP Extension
 - XML PHP Extension
+- MYSQL
 
 For more information, please reference:
 https://laravel.com/docs/5.4
+
+## Installation
+
+### Step 1: Download source code
+
+Git and clone this project.
+```
+git clone https://github.com/keith-lo/tink-labs-technical-test.git .
+```
+
+### Step 2: Install packages
+
+Install composer repositories
+```
+composer update
+```
+
+### Step 3: Setup system environment
+
+To setup system environments, you can edit `app/config/app.php` or copy a environment file `.env` from `.env.example`.
+
+Update database connection `DB_` to your server settings.
+
+### Step 4: Database migration
+
+Run the database migrations
+```
+php artisan migrate
+```
+
+And insert database records
+```
+php db:seed
+```
 
