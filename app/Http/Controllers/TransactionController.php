@@ -94,7 +94,7 @@ class TransactionController extends Controller
             throw new \Exception('Given account insufficient fund.');
         }
 
-        $this->_check_daily_limit($from_account);
+        $this->_check_daily_limit($from_account, doubleval($amount));
 
         $transactions = [];
         if( empty($to_account) ){
@@ -142,7 +142,6 @@ class TransactionController extends Controller
         }
 
         //Start transaction
-        $is_success = false;
         \DB::transaction(function() use($transactions, $from_account, $to_account){
             $is_success = true;
             foreach( $transactions as $transaction ){
@@ -155,16 +154,13 @@ class TransactionController extends Controller
                 if( !$to_account->save() ){ $is_success = false; }
             }
         });
+        $is_success = true;
 
         $data = ['from_account' => $from_account, 'transactions' => $transactions];
         $data['to_account'] = ( $to_account ) ? $to_account : array();
         return response()->json([
             'success' => $is_success, 'data' => $data,
         ]);
-
-        var_dump($to_account);
-
-        print_r($_POST);exit;
     }
 
     private function _check_valid_external_account($number){
@@ -202,20 +198,29 @@ class TransactionController extends Controller
         return ( $is_validate ) ? $res->firstOrFail() : $res->first();
     }
 
-    private function _check_daily_limit(\App\Account $from_account, double $amount){
+    /**
+     * Check given account
+     * whether current transaction amount is over limit
+     *
+     * @param \App\Account $from_account
+     * @param double $amount
+     * @return boolean, true is means passed
+     */
+    private function _check_daily_limit(\App\Account $from_account, $amount){
         $from_date = date('Y-m-d').' 00:00:00';
         $to_date = date('Y-m-d').' 23:59:59';
-//\DB::enableQueryLog();
+
         $transactions = $from_account->transactions()
             ->where('created_at', '>=', $from_date)
             ->where('created_at', '<=', $to_date)
+            ->where('purpose_id', \App\Purpose::TRANSFER_OUT)
             ->get();
 
-//print_r(\DB::getQueryLog());
         $daily_limit = config('bank.daily_transfer_limit');
         foreach( $transactions as $transaction ){
             $daily_limit -= $transaction->amount;
         }
+
         if( $daily_limit <= $amount ){
             throw new \Exception('Account transfer over daily limit.');
         }

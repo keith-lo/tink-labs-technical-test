@@ -68,16 +68,11 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        echo 'ok';
         $account->delete();
-        exit;
-        //Set is_active = 0 to archive the account instead of delete it.
-        $account->is_active = false;
-
-        $is_success = $account->save();
 
         return response()->json([
-            'success' => $is_success
+            'success' => true,
+            'data' => ['account' => $account],
         ]);
     }
 }
