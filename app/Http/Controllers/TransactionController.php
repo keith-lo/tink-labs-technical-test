@@ -94,6 +94,8 @@ class TransactionController extends Controller
             throw new \Exception('Given account insufficient fund.');
         }
 
+        $this->_check_daily_limit($from_account);
+
         $transactions = [];
         if( empty($to_account) ){
             $is_valid = $this->_check_valid_external_account($request->input('to'));
@@ -105,7 +107,7 @@ class TransactionController extends Controller
             //Status is pennding because T+2
             $charge = config('bank.service_charge');
             $transactions[] = $this->_createTransaction([
-                'account_id' => $from_account->id, 'purpose_id' => \App\Purpose::TRANSFER,
+                'account_id' => $from_account->id, 'purpose_id' => \App\Purpose::TRANSFER_OUT,
                 'is_credit' => true, 'status' => \App\Transaction::PENDING,
                 'title' => 'Transfer '.$amount, 'amount' => $amount,
                 'description' => 'External account : '.$request->input('to'),
@@ -123,10 +125,16 @@ class TransactionController extends Controller
         }else{
             //Create an transaction
             $transactions[] = $this->_createTransaction([
-                'account_id' => $from_account->id, 'purpose_id' => \App\Purpose::TRANSFER,
+                'account_id' => $from_account->id, 'purpose_id' => \App\Purpose::TRANSFER_OUT,
                 'is_credit' => true, 'status' => \App\Transaction::COMPLETED,
                 'title' => 'Transfer '.$amount, 'amount' => $amount,
                 'description' => 'To account : '.$to_account->number,
+            ]);
+            $transactions[] = $this->_createTransaction([
+                'account_id' => $to_account->id, 'purpose_id' => \App\Purpose::TRANSFER_IN,
+                'is_credit' => true, 'status' => \App\Transaction::COMPLETED,
+                'title' => 'Receive '.$amount, 'amount' => $amount,
+                'description' => 'From account : '.$from_account->number,
             ]);
 
             $from_account->balance -= $amount;
@@ -192,6 +200,27 @@ class TransactionController extends Controller
         //Get and check whether the account is exists.
         $res = \App\Account::where('number', $account_number);
         return ( $is_validate ) ? $res->firstOrFail() : $res->first();
+    }
+
+    private function _check_daily_limit(\App\Account $from_account, double $amount){
+        $from_date = date('Y-m-d').' 00:00:00';
+        $to_date = date('Y-m-d').' 23:59:59';
+//\DB::enableQueryLog();
+        $transactions = $from_account->transactions()
+            ->where('created_at', '>=', $from_date)
+            ->where('created_at', '<=', $to_date)
+            ->get();
+
+//print_r(\DB::getQueryLog());
+        $daily_limit = config('bank.daily_transfer_limit');
+        foreach( $transactions as $transaction ){
+            $daily_limit -= $transaction->amount;
+        }
+        if( $daily_limit <= $amount ){
+            throw new \Exception('Account transfer over daily limit.');
+        }
+
+        return true;
     }
 
     /**

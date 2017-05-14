@@ -63,4 +63,5 @@ DocumentRoot "/home/vagrant/projects/my-app/public"
 
 ## Testing
 
-`Postman/`
+In order to test this system, we can use [Postman](https://www.getpostman.com/)
+
