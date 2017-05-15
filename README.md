@@ -49,7 +49,7 @@ php artisan migrate
 
 And insert database records
 ```
-php db:seed
+php artisan db:seed
 ```
 
 ### Step 5: Map apache `DocumentRoot`
