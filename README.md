@@ -88,7 +88,7 @@ Postman is the complete toolchain for API developers. To install postman, please
 1. Install and open `postman` application.
 2. Select `Import` on left top menu.
 3. Choose `Import Folder` tab and choose **postman/** folder of this repository.
-4. After import success, select the environment set `Tink-Labs`. Change the variable to your own environment.
+4. Select the environment dropdown on right top menu and choose `Tink-Labs`. Change the variable to your own environment.
 
 **Please check postman docs for how to use the API calls**
 
