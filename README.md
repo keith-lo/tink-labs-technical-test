@@ -68,15 +68,15 @@ API url prefix is `/api` with version number. (current version is *1.0*)
 For example, if you would to list all accounts, you should call:
 - {domain_hosts}/api/1.0/account
 
-| Verb | URI                    | Action              | Params                             |
-|------|------------------------|---------------------|------------------------------------|
-| POST | account                | Open an account     | Required: number Optional: balance |
-| GET  | account/{{account_id}} | Get account details |                                    |
-| GET  | account                | List accounts       |                                    |
-| POST | account/{{account_id}} | Delete an account   |                                    |
-| POST | transaction/deposit    | Deposit money       | Required: number, amount           |
-| POST | transaction/withdraw   | Withdraw money      | Required: number, amount           |
-| POST | transaction/transfer   | Transfer money      | Required: from, to, amount         |
+| Verb | URI                    | Action              | Params                                     |
+|------|------------------------|---------------------|--------------------------------------------|
+| POST | account                | Open an account     | **Required:** number **Optional:** balance |
+| GET  | account/{{account_id}} | Get account details |                                            |
+| GET  | account                | List accounts       |                                            |
+| POST | account/{{account_id}} | Delete an account   |                                            |
+| POST | transaction/deposit    | Deposit money       | **Required:** number, amount               |
+| POST | transaction/withdraw   | Withdraw money      | **Required:** number, amount               |
+| POST | transaction/transfer   | Transfer money      | **Required:** from, to, amount             |
 
 ## Testing
 
