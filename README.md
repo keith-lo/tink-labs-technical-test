@@ -1,4 +1,4 @@
-# Simple Banking Test
+# Tink Labs coding test
 
 This is coding test project to simulate the functionality of a basic bank account.
 
@@ -63,13 +63,34 @@ DocumentRoot "/home/vagrant/projects/my-app/public"
 
 ## API
 
+API url prefix is `/api` with version number. (current version is *1.0*)
 
+For example, if you would to list all accounts, you should call:
+- {domain_hosts}/api/1.0/account
+
+| Verb | URI                    | Action              | Params                             |
+|------|------------------------|---------------------|------------------------------------|
+| POST | account                | Open an account     | Required: number Optional: balance |
+| GET  | account/{{account_id}} | Get account details |                                    |
+| GET  | account                | List accounts       |                                    |
+| POST | account/{{account_id}} | Delete an account   |                                    |
+| POST | transaction/deposit    | Deposit money       | Required: number, amount           |
+| POST | transaction/withdraw   | Withdraw money      | Required: number, amount           |
+| POST | transaction/transfer   | Transfer money      | Required: from, to, amount         |
 
 ## Testing
 
 ### Postman
 Postman is the complete toolchain for API developers. To install postman, please reference https://www.getpostman.com/ .
 
-Please check `postman` folder for a sample of preset postman testing environment.
+**Setup `postman` testing environment**
 
-You can simply `Import folder` and start the api testing.
+1. Install and open `postman` application.
+2. Select `Import` on left top menu.
+3. Choose `Import Folder` tab and choose `postman` folder of this repository.
+4. After import success, select the environment set `Tink-Labs`. Change the variable to your own environment.
+
+**Please check postman docs for how to use the API calls**
+
+1. Mouse over `Tink-Labs` collection folder and click on `>` to show more options
+2. Select button `View Docs`
